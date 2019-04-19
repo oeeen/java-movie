@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class Ticketing {
-    public static ReserveMovie startTitcketing() {
+    public static ReserveMovie startTicketing(List<ReserveMovie> reserveMovies) {
         int movieId = InputView.inputMovieId();
         Movie currentMovie = MovieRepository.searchMovies(movieId, 0);
         while (currentMovie == null) {
@@ -20,7 +20,7 @@ public class Ticketing {
             currentMovie = MovieRepository.searchMovies(movieId, 0);
         }
         OutputView.printMovie(currentMovie);
-        int movieTimeTable = InputView.inputTimetable(currentMovie);
+        int movieTimeTable = InputView.inputTimetable(reserveMovies, currentMovie);
         int movieNumOfPerson = InputView.inputNumOfPerson(currentMovie, movieTimeTable);
         return new ReserveMovie(currentMovie, currentMovie.getPlaySchedules().get(movieTimeTable), movieNumOfPerson);
     }

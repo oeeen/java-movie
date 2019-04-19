@@ -28,4 +28,8 @@ public class ReserveMovie {
     public int getNumOfPerson() {
         return this.numOfPerson;
     }
+
+    public PlaySchedule getPlaySchedule() {
+        return this.playSchedule;
+    }
 }

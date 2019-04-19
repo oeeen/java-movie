@@ -1,5 +1,7 @@
 package domain;
 
+import utils.DateTimeUtils;
+
 import java.time.LocalDateTime;
 
 import static utils.DateTimeUtils.format;
@@ -30,5 +32,9 @@ public class PlaySchedule {
      */
     public boolean isOverCapacity(int request) {
         return request > this.capacity;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return this.startDateTime;
     }
 }

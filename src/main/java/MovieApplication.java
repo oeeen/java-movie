@@ -16,7 +16,7 @@ public class MovieApplication {
         boolean additionalTicketing = true;
 
         while (additionalTicketing) {
-            reserveMovies.add(Ticketing.startTitcketing());
+            reserveMovies.add(Ticketing.startTicketing(reserveMovies));
             additionalTicketing = InputView.inputAdditionalTicketing();
         }
         OutputView.printHistory(reserveMovies);

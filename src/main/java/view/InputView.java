@@ -2,6 +2,7 @@ package view;
 
 import domain.Movie;
 import domain.ReserveMovie;
+import utils.DateTimeUtils;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,16 +15,22 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static int inputTimetable(Movie currentMovie) {
+    public static int inputTimetable(List<ReserveMovie> reserveMovies, Movie currentMovie) {
         System.out.println("## 예약할 시간표를 선택하세요.(첫번째 상영시간이 1번)");
         int movieTimeTable = scanner.nextInt() - 1;
         if (movieTimeTable >= currentMovie.getPlaySchedules().size()) {
             System.out.println("잘못된 입력입니다. 다시 선택 해 주세요.");
-            return inputTimetable(currentMovie);
+            return inputTimetable(reserveMovies, currentMovie);
         }
         if (currentMovie.getPlaySchedules().get(movieTimeTable).isOverStartTime()) {
             System.out.println("상영 시간이 지났습니다. 다시 선택 해 주세요.");
-            return inputTimetable(currentMovie);
+            return inputTimetable(reserveMovies, currentMovie);
+        }
+        for (int i = 0; i < reserveMovies.size(); i++) {
+            if (!DateTimeUtils.isOneHourWithinRange(reserveMovies.get(i).getPlaySchedule().getStartDateTime(), currentMovie.getPlaySchedules().get(movieTimeTable).getStartDateTime())) {
+                System.out.println("예약 영화 간에는 1시간 이내여야 합니다. 다시 선택 해 주세요.");
+                return inputTimetable(reserveMovies, currentMovie);
+            }
         }
         return movieTimeTable;
     }
