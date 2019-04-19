@@ -14,6 +14,11 @@ public class Ticketing {
     public static ReserveMovie startTitcketing() {
         int movieId = InputView.inputMovieId();
         Movie currentMovie = MovieRepository.searchMovies(movieId, 0);
+        while (currentMovie == null) {
+            System.out.println("목록에 없는 영화 입니다. 다시 선택 해 주세요.");
+            movieId = InputView.inputMovieId();
+            currentMovie = MovieRepository.searchMovies(movieId, 0);
+        }
         OutputView.printMovie(currentMovie);
         int movieTimeTable = InputView.inputTimetable(currentMovie);
         int movieNumOfPerson = InputView.inputNumOfPerson(currentMovie, movieTimeTable);
