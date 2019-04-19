@@ -21,7 +21,7 @@ public class Ticketing {
         }
         OutputView.printMovie(currentMovie);
         int movieTimeTable = InputView.inputTimetable(reserveMovies, currentMovie);
-        int movieNumOfPerson = InputView.inputNumOfPerson(currentMovie, movieTimeTable);
+        int movieNumOfPerson = InputView.inputNumOfPerson(reserveMovies, currentMovie, movieTimeTable);
         return new ReserveMovie(currentMovie, currentMovie.getPlaySchedules().get(movieTimeTable), movieNumOfPerson);
     }
 

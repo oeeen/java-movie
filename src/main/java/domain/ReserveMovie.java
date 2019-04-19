@@ -32,4 +32,8 @@ public class ReserveMovie {
     public PlaySchedule getPlaySchedule() {
         return this.playSchedule;
     }
+
+    public int getNumOfPerson(Movie movie, PlaySchedule playSchedule) {
+        return ((movie == this.movie) && (playSchedule == this.playSchedule)) ? this.numOfPerson : 0;
+    }
 }

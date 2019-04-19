@@ -35,12 +35,16 @@ public class InputView {
         return movieTimeTable;
     }
 
-    public static int inputNumOfPerson(Movie currentMovie, int movieTimeTable) {
+    public static int inputNumOfPerson(List<ReserveMovie> reserveMovies, Movie currentMovie, int movieTimeTable) {
         System.out.println("## 예약할 인원을 입력하세요.");
         int movieNumOfPerson = scanner.nextInt();
-        if (currentMovie.getPlaySchedules().get(movieTimeTable).isOverCapacity(movieNumOfPerson)) {
+        int totalNumOfPerson = movieNumOfPerson;
+        for (int i = 0; i < reserveMovies.size(); i++) {
+            totalNumOfPerson += reserveMovies.get(i).getNumOfPerson(currentMovie, currentMovie.getPlaySchedules().get(movieTimeTable));
+        }
+        if (currentMovie.getPlaySchedules().get(movieTimeTable).isOverCapacity(totalNumOfPerson)) {
             System.out.println("예매 가능 인원을 초과합니다. 다시 선택 해 주세요.");
-            return inputNumOfPerson(currentMovie, movieTimeTable);
+            return inputNumOfPerson(reserveMovies, currentMovie, movieTimeTable);
         }
         return movieNumOfPerson;
     }
